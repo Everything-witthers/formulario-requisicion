@@ -18,14 +18,12 @@ const listaProductos = [
   }
 ];
 
-// Autocompletado desde campo buscador auxiliar
+// Autocompletado desde buscador auxiliar
 document.getElementById("buscador").addEventListener("input", function () {
   const texto = this.value.trim().toLowerCase();
-
   const encontrado = listaProductos.find(p =>
     p.nombre.toLowerCase().includes(texto) || p.sku.toLowerCase().includes(texto)
   );
-
   if (encontrado) {
     document.getElementById("sku").value = encontrado.sku;
     document.getElementById("producto").value = encontrado.nombre;
@@ -33,7 +31,7 @@ document.getElementById("buscador").addEventListener("input", function () {
   }
 });
 
-// Autocompletado directo desde campo producto
+// Autocompletado desde nombre
 document.getElementById("producto").addEventListener("input", function () {
   const nombre = this.value.toLowerCase().trim();
   const encontrado = listaProductos.find(p =>
@@ -45,7 +43,7 @@ document.getElementById("producto").addEventListener("input", function () {
   }
 });
 
-// Autocompletado directo desde campo SKU
+// Autocompletado desde SKU
 document.getElementById("sku").addEventListener("input", function () {
   const sku = this.value.toUpperCase().trim();
   const encontrado = listaProductos.find(p =>
