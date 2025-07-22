@@ -1,0 +1,29 @@
+body {
+  font-family: sans-serif;
+  padding: 20px;
+  background: #f4f4f4;
+}
+
+form, table {
+  margin-bottom: 20px;
+}
+
+input, button {
+  padding: 8px;
+  margin: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+button {
+  cursor: pointer;
+}
