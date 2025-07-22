@@ -47,7 +47,7 @@ function enviarFormulario() {
     productos
   };
 
-  fetch("https://script.google.com/a/macros/elarriero.cl/s/AKfycbztmo4H5J6vKYPeQwtNNew9kU1yh1QjWYFbMWqVDae3I0nkovX6jW8wTzGqite6T_FF2g/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbwh-GEucjJA_z9yit_3BH-IF77BmHInEWzf0gGTDSv6Vt5YQRyxRDrGmJRd90AOjxsC/exec",
     method: "POST",
     mode: "no-cors",
     headers: {
