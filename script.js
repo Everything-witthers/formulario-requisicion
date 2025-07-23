@@ -1,24 +1,19 @@
+let listaProductos = [];
 const productos = [];
 
-const listaProductos = [
-  {
-    sku: "LIQ-1-07-02",
-    nombre: "Aloe OKF durazno 500 ml",
-    unidad: "Pack de 20 unidades"
-  },
-  {
-    sku: "MAN-K-01-25",
-    nombre: "Maní Salado 22 gr",
-    unidad: "Caja de 100"
-  },
-  {
-    sku: "JOJO-AC-15",
-    nombre: "JOJO Cereza Ácida",
-    unidad: "Paquete de 50"
-  }
-];
+// Cargar datos desde la Google Sheet
+fetch("https://script.google.com/macros/s/AKfycbxwNpvQaQfQ7qYjBf7SDeOBmgS4-5dgXJQvBWq1kMvQGDqDtf9Q_YLkh7xGhbBJNnHnCw/exec")
+  .then(res => res.json())
+  .then(data => {
+    listaProductos = data.map(p => ({
+      sku: p.sku,
+      nombre: p["nombre del producto"],
+      unidad: p.unidad
+    }));
+    console.log("Productos cargados:", listaProductos);
+  });
 
-// Autocompletado desde buscador auxiliar
+// Buscador auxiliar
 document.getElementById("buscador").addEventListener("input", function () {
   const texto = this.value.trim().toLowerCase();
   const encontrado = listaProductos.find(p =>
@@ -31,7 +26,7 @@ document.getElementById("buscador").addEventListener("input", function () {
   }
 });
 
-// Autocompletado desde nombre
+// Autocompletado por nombre
 document.getElementById("producto").addEventListener("input", function () {
   const nombre = this.value.toLowerCase().trim();
   const encontrado = listaProductos.find(p =>
@@ -43,7 +38,7 @@ document.getElementById("producto").addEventListener("input", function () {
   }
 });
 
-// Autocompletado desde SKU
+// Autocompletado por SKU
 document.getElementById("sku").addEventListener("input", function () {
   const sku = this.value.toUpperCase().trim();
   const encontrado = listaProductos.find(p =>
@@ -102,15 +97,4 @@ function limpiarFormulario() {
   document.getElementById("unidad").value = "";
   document.getElementById("nota").value = "";
   document.getElementById("buscador").value = "";
-}
-
-function enviarFormulario() {
-  if (productos.length === 0) {
-    alert("Agrega al menos un producto antes de enviar");
-    return;
-  }
-
-  alert("Requisición enviada (modo demo)");
-  productos.length = 0;
-  renderizarTabla();
 }
