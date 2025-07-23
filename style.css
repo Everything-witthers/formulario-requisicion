@@ -1,71 +1,26 @@
-:root {
-  --verde-musgo: #7E8C54;
-  --grafito: #1C1C1C;
-  --blanco-hueso: #F6F5F2;
-  --gris-suave: #f0f0f0;
-}
-
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--blanco-hueso);
-  color: var(--grafito);
-  padding: 2rem;
-}
-
-h1 {
-  color: var(--grafito);
-}
-
-input, textarea, button {
-  padding: 10px;
-  margin: 6px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-input:focus, textarea:focus {
-  border-color: var(--verde-musgo);
-  outline: none;
-}
-
-button {
-  background-color: var(--verde-musgo);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-}
-
-button:hover {
-  background-color: #6e7b47;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-  background-color: white;
-  border-radius: 6px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-
-th, td {
-  text-align: left;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: var(--gris-suave);
-}
-
-tr:hover {
+  font-family: sans-serif;
+  margin: 20px;
   background-color: #f9f9f9;
 }
 
-.formulario {
-  margin-bottom: 1rem;
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input {
+  width: 300px;
+  padding: 6px;
+  margin-top: 4px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #7E8C54;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
