@@ -1,8 +1,11 @@
 let listaProductos = [];
 const productos = [];
 
-// Cargar datos desde la Google Sheet
-fetch("https://script.google.com/macros/s/AKfycbxwNpvQaQfQ7qYjBf7SDeOBmgS4-5dgXJQvBWq1kMvQGDqDtf9Q_YLkh7xGhbBJNnHnCw/exec")
+// NUEVA URL del Apps Script
+const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyZpM544UgkXCuWAyn1fTCxT45EYO33dE1iaihFTNXi1XSefaArV5ybiy_HS8C5Nc6CGA/exec";
+
+// Cargar catálogo desde la hoja de Google Sheets
+fetch(URL_SCRIPT)
   .then(res => res.json())
   .then(data => {
     listaProductos = data.map(p => ({
@@ -13,7 +16,7 @@ fetch("https://script.google.com/macros/s/AKfycbxwNpvQaQfQ7qYjBf7SDeOBmgS4-5dgXJ
     mostrarCatalogo();
   });
 
-// Buscador auxiliar
+// Buscador principal
 document.getElementById("buscador").addEventListener("input", function () {
   const texto = this.value.trim().toLowerCase();
   const encontrado = listaProductos.find(p =>
@@ -112,4 +115,21 @@ function mostrarCatalogo() {
       </tr>`;
     tbody.innerHTML += fila;
   });
+}
+
+// Opcional: enviar por correo o a Google Sheets (a definir)
+function enviarFormulario() {
+  if (productos.length === 0) {
+    alert("No hay productos para enviar.");
+    return;
+  }
+
+  const cuerpo = productos.map(p =>
+    `• ${p.cantidad} ${p.unidad} de ${p.producto} (${p.sku}) ${p.nota ? '- ' + p.nota : ''}`
+  ).join('\n');
+
+  alert("Formulario preparado para enviar:\n\n" + cuerpo);
+  // Aquí puedes agregar el fetch para enviar datos al backend si lo deseas
+  productos.length = 0;
+  renderizarTabla();
 }
