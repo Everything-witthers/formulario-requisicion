@@ -2,7 +2,7 @@ let listaProductos = [];
 const productos = [];
 
 // Cargar datos desde la Google Sheet
-fetch("https://script.google.com/macros/s/AKfycbyQXQFVgl-FH-3C_vZ3M601wYBBzdQhOS2TGytfyNBe-G8cbo02GIxmcJYwjCqdBPx-/exec")
+fetch("https://script.google.com/macros/s/AKfycbxwNpvQaQfQ7qYjBf7SDeOBmgS4-5dgXJQvBWq1kMvQGDqDtf9Q_YLkh7xGhbBJNnHnCw/exec")
   .then(res => res.json())
   .then(data => {
     listaProductos = data.map(p => ({
@@ -10,7 +10,7 @@ fetch("https://script.google.com/macros/s/AKfycbyQXQFVgl-FH-3C_vZ3M601wYBBzdQhOS
       nombre: p.nombre,
       unidad: p.unidad
     }));
-    console.log("Productos cargados:", listaProductos);
+    mostrarCatalogo();
   });
 
 // Buscador auxiliar
@@ -97,4 +97,19 @@ function limpiarFormulario() {
   document.getElementById("unidad").value = "";
   document.getElementById("nota").value = "";
   document.getElementById("buscador").value = "";
+}
+
+function mostrarCatalogo() {
+  const tbody = document.querySelector("#tabla-catalogo tbody");
+  tbody.innerHTML = "";
+
+  listaProductos.forEach(p => {
+    const fila = `
+      <tr>
+        <td>${p.sku}</td>
+        <td>${p.nombre}</td>
+        <td>${p.unidad}</td>
+      </tr>`;
+    tbody.innerHTML += fila;
+  });
 }
