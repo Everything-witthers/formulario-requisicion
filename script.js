@@ -7,14 +7,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const buscador = document.getElementById("buscador");
   if (buscador) {
     buscador.addEventListener("input", autocompletar);
-  } else {
-    console.error("No se encontró el campo con id='buscador'");
   }
 });
 
 async function obtenerProductos() {
-  const apiKey = "TU_API_KEY_AQUÍ";
-  const baseId = "TU_BASE_ID_AQUÍ";
+  const apiKey = "TU_API_KEY";
+  const baseId = "TU_BASE_ID";
   const tableName = "Productos";
 
   const url = `https://api.airtable.com/v0/${baseId}/${tableName}?maxRecords=100&view=Grid%20view`;
@@ -27,9 +25,9 @@ async function obtenerProductos() {
     });
     const data = await response.json();
     listaProductos = data.records.map(record => ({
-      sku: record.fields["SKU"],
-      nombre: record.fields["Nombre del producto"],
-      unidad: record.fields["Unidad"]
+      sku: record.fields["SKU"] || "",
+      nombre: record.fields["Nombre del producto"] || "",
+      unidad: record.fields["Unidad"] || ""
     }));
   } catch (error) {
     console.error("Error al obtener los productos:", error);
@@ -48,4 +46,9 @@ function autocompletar(e) {
     document.getElementById("nombre").value = resultado.nombre;
     document.getElementById("unidad").value = resultado.unidad;
   }
+}
+
+// Evita error por botón aún no funcional
+function agregarProducto() {
+  alert("Función agregarProducto aún no implementada.");
 }
