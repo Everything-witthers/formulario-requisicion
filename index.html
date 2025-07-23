@@ -3,24 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Formulario de Requisición</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
   <h1>Formulario de Requisición</h1>
 
-  <label for="buscador">Buscar producto (SKU o nombre):</label>
-  <input type="text" id="buscador" placeholder="Ej: MAN-K-01 o Maní Salado">
+  <label for="buscador">Buscar producto:</label>
+  <input type="text" id="buscador" placeholder="Escribe el nombre o SKU...">
+  
+  <button onclick="agregarProducto()">Agregar</button>
 
-  <label for="sku">SKU:</label>
-  <input type="text" id="sku" readonly>
-
-  <label for="nombre">Nombre del producto:</label>
-  <input type="text" id="nombre" readonly>
-
-  <label for="unidad">Unidad:</label>
-  <input type="text" id="unidad" readonly>
-
-  <button onclick="agregarProducto()">Agregar producto</button>
+  <table id="tabla-productos">
+    <thead>
+      <tr>
+        <th>SKU</th>
+        <th>Nombre</th>
+        <th>Unidad</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
   <script src="script.js"></script>
 </body>
