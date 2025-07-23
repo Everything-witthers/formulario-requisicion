@@ -2,41 +2,17 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulario de Requisición</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Requisiciones</title>
 </head>
 <body>
-  <h1>Requisición de Productos</h1>
+  <h1>Formulario de Requisición</h1>
 
-  <!-- Buscador único -->
-  <input type="text" id="buscador" placeholder="Buscar por SKU o nombre..." />
+  <input type="text" id="busqueda" placeholder="Buscar por SKU o nombre..." />
+  <br><br>
+  <label>SKU:</label> <input type="text" id="sku" readonly><br>
+  <label>Nombre:</label> <input type="text" id="nombre" readonly><br>
+  <label>Unidad:</label> <input type="text" id="unidad" readonly><br>
 
-  <form id="formulario-requisicion">
-    <input type="text" id="sku" placeholder="SKU" readonly />
-    <input type="text" id="producto" placeholder="Nombre del producto" readonly />
-    <input type="number" id="cantidad" placeholder="Cantidad" required />
-    <input type="text" id="unidad" placeholder="Unidad" readonly />
-    <input type="text" id="nota" placeholder="Notas adicionales" />
-    <button type="button" onclick="agregarProducto()">Agregar</button>
-  </form>
-
-  <table id="tabla-productos">
-    <thead>
-      <tr>
-        <th>SKU</th>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Unidad</th>
-        <th>Notas</th>
-        <th>Acción</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-  <button id="btn-enviar" onclick="enviarFormulario()">Enviar requisición</button>
-
-  <script src="script.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
