@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function obtenerProductos() {
-  const apiKey = "TU_API_KEY";
-  const baseId = "TU_BASE_ID";
+  const apiKey = "patNDDZVUwKy2W1Xh.c6a4b1a797e167a6ad2d31422b8b19e021cce2e08ce5296968a2569988fadca7";
+  const baseId = "app9HBi9ATwzif4cm";
   const tableName = "Productos";
 
   const url = `https://api.airtable.com/v0/${baseId}/${tableName}?maxRecords=100&view=Grid%20view`;
