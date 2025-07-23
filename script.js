@@ -2,12 +2,12 @@ let listaProductos = [];
 const productos = [];
 
 // Cargar datos desde la Google Sheet
-fetch("https://script.google.com/macros/s/AKfycbxwNpvQaQfQ7qYjBf7SDeOBmgS4-5dgXJQvBWq1kMvQGDqDtf9Q_YLkh7xGhbBJNnHnCw/exec")
+fetch("https://script.google.com/macros/s/AKfycbyQXQFVgl-FH-3C_vZ3M601wYBBzdQhOS2TGytfyNBe-G8cbo02GIxmcJYwjCqdBPx-/exec")
   .then(res => res.json())
   .then(data => {
     listaProductos = data.map(p => ({
       sku: p.sku,
-      nombre: p["nombre del producto"],
+      nombre: p.nombre,
       unidad: p.unidad
     }));
     console.log("Productos cargados:", listaProductos);
