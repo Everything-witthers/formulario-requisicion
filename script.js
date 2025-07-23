@@ -1,55 +1,36 @@
 let listaProductos = [];
 const productos = [];
 
-// NUEVA URL del Apps Script
 const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyZpM544UgkXCuWAyn1fTCxT45EYO33dE1iaihFTNXi1XSefaArV5ybiy_HS8C5Nc6CGA/exec";
 
-// Cargar catálogo desde la hoja de Google Sheets
+// Cargar datos desde la hoja de Google
 fetch(URL_SCRIPT)
   .then(res => res.json())
   .then(data => {
     listaProductos = data.map(p => ({
-      sku: p.sku,
-      nombre: p.nombre,
-      unidad: p.unidad
+      sku: p.sku.trim(),
+      nombre: p.nombre.trim(),
+      unidad: p.unidad.trim()
     }));
-    mostrarCatalogo();
   });
 
-// Buscador principal
+// Buscador único para SKU o nombre
 document.getElementById("buscador").addEventListener("input", function () {
   const texto = this.value.trim().toLowerCase();
+
   const encontrado = listaProductos.find(p =>
     p.nombre.toLowerCase().includes(texto) || p.sku.toLowerCase().includes(texto)
   );
+
   if (encontrado) {
     document.getElementById("sku").value = encontrado.sku;
     document.getElementById("producto").value = encontrado.nombre;
     document.getElementById("unidad").value = encontrado.unidad;
-  }
-});
-
-// Autocompletado por nombre
-document.getElementById("producto").addEventListener("input", function () {
-  const nombre = this.value.toLowerCase().trim();
-  const encontrado = listaProductos.find(p =>
-    p.nombre.toLowerCase().includes(nombre)
-  );
-  if (encontrado) {
-    document.getElementById("sku").value = encontrado.sku;
-    document.getElementById("unidad").value = encontrado.unidad;
-  }
-});
-
-// Autocompletado por SKU
-document.getElementById("sku").addEventListener("input", function () {
-  const sku = this.value.toUpperCase().trim();
-  const encontrado = listaProductos.find(p =>
-    p.sku.toUpperCase().includes(sku)
-  );
-  if (encontrado) {
-    document.getElementById("producto").value = encontrado.nombre;
-    document.getElementById("unidad").value = encontrado.unidad;
+  } else {
+    // Si no hay coincidencia, limpiar campos relacionados
+    document.getElementById("sku").value = "";
+    document.getElementById("producto").value = "";
+    document.getElementById("unidad").value = "";
   }
 });
 
@@ -61,7 +42,7 @@ function agregarProducto() {
   const nota = document.getElementById("nota").value;
 
   if (!producto || !cantidad) {
-    alert("Por favor completa al menos producto y cantidad");
+    alert("Completa al menos el producto y la cantidad.");
     return;
   }
 
@@ -102,34 +83,17 @@ function limpiarFormulario() {
   document.getElementById("buscador").value = "";
 }
 
-function mostrarCatalogo() {
-  const tbody = document.querySelector("#tabla-catalogo tbody");
-  tbody.innerHTML = "";
-
-  listaProductos.forEach(p => {
-    const fila = `
-      <tr>
-        <td>${p.sku}</td>
-        <td>${p.nombre}</td>
-        <td>${p.unidad}</td>
-      </tr>`;
-    tbody.innerHTML += fila;
-  });
-}
-
-// Opcional: enviar por correo o a Google Sheets (a definir)
 function enviarFormulario() {
   if (productos.length === 0) {
     alert("No hay productos para enviar.");
     return;
   }
 
-  const cuerpo = productos.map(p =>
+  const resumen = productos.map(p =>
     `• ${p.cantidad} ${p.unidad} de ${p.producto} (${p.sku}) ${p.nota ? '- ' + p.nota : ''}`
   ).join('\n');
 
-  alert("Formulario preparado para enviar:\n\n" + cuerpo);
-  // Aquí puedes agregar el fetch para enviar datos al backend si lo deseas
+  alert("Formulario listo para enviar:\n\n" + resumen);
   productos.length = 0;
   renderizarTabla();
 }
